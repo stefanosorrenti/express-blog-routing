@@ -20,7 +20,13 @@ router.get('/', (req, res) => {
 
 //SHOW
 router.get('/:id', (req, res) => {
-    res.send(`Dettagli del post ${req.params.id}`)
+    const post = macchine.find(macchina => macchina.id === parseInt(req.params.id))
+    if(post) {
+        res.send(post)
+    } else {
+        res.send('Post non trovato')
+    }
+    
 });
 
 //STORE
