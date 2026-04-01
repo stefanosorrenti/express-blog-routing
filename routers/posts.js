@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const post = macchine.find(macchina => macchina.id === parseInt(req.params.id))
     if(post) {
-        res.send(post)
+        res.json(post)
     } else {
         res.send('Post non trovato')
     }
@@ -46,7 +46,15 @@ router.patch('/:id', (req, res) => {
 
 //DESTROY
 router.delete('/:id', (req, res) => {
-    res.send(`Elimina il post ${req.params.id}`)
+    const idString = req.params.id
+    const removedPost = macchine.find(macchine => macchine.id === parseInt(idString))
+
+    if(removedPost) {
+        res.json(removedPost)
+    } else {
+        res.send('Non riesco a trovare il posta da eliminare')
+    }
+    
 });
 
 module.exports = router;
